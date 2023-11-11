@@ -1,0 +1,239 @@
+/*
+ * Copyright © Kai Hofbauer – All Rights Reserved
+ * 
+ * EN
+ * Unauthorized copying of this software, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Kai Hofbauer kaihofbauer@icloud.com, October 2023
+ * All components of this software that have not been newly developed (compilers, package sources and archives), as well as the development environment, have been expressly released by the manufacturers for commercial use.
+ * The newly designed source code and its compilations, however, are newly created intellectual property of Kai Hofbauer for commercial use.
+ * 
+ * DE
+ * Unerlaubtes Kopieren dieser Software, egal mit welchem Medium, ist strengstens verboten.
+ * Proprietär und vertraulich
+ * Geschrieben von Kai Hofbauer kaihofbauer@icloud.com, Oktober 2023
+ * Alle nicht neu entwickelten Bestandteile (Compiler, Paketquellen und Archive) dieser Software, sowie die Entwicklungsumgebung sind von den Herstellern für die kommerzielle Nutzung ausdrücklich freigegeben.
+ * Der neu entworfene Quellcode und seine Kompilierungen sind hingegen für den kommerziellen Gebrauch neu erschaffenes, geistiges Eigentum von Kai Hofbauer.
+ * 
+ * 
+ * Verwendete Software:
+ * •	Entwicklungsumgebung:		Apache NetBeans IDE 19	https://netbeans.apache.org/
+ * •	Programmiersprache:		JAVA
+ * •	JDK:				21			https://adoptium.net
+ * 
+ * 
+ * © Kai Hofbauer – 2023
+ */
+package uk.wu.kh.mlsal.GUIs;
+
+import java.util.ArrayList;
+import javax.swing.table.AbstractTableModel;
+import uk.wu.kh.mlsal.Fields.Field;
+import uk.wu.kh.mlsal.History.Movement;
+
+/**
+ *
+ * This GUI show a JList of ball movements on the broadgame. The user can easily
+ * reconstruct the game histroy. (QS) The user can clear the list of all
+ * elements and he can remove all unmoved ball movements. When the dice fell
+ * down you have to dice again!
+ *
+ * @see Movement
+ *
+ * <p>
+ * As in the MapView class I implemented the TableModel here.
+ * </p>
+ * @see MapView
+ *
+ * @author Kai Hofbauer
+ */
+public class HistroyView extends javax.swing.JFrame {
+
+    private final AbstractTableModel abstractTableModel;
+    private static ArrayList<Movement> movement_histroy;
+
+    /**
+     * Creates new form MapView
+     *
+     * @param movement_histroy
+     */
+    public HistroyView(ArrayList movement_histroy) {
+        HistroyView.movement_histroy = movement_histroy;
+        initComponents();
+
+        abstractTableModel = new AbstractTableModel() {
+            @Override
+            public int getRowCount() {
+                return movement_histroy.size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 6;
+            }
+
+            @Override
+            public String getColumnName(int columnIndex) {
+                switch (columnIndex) {
+                    case 0 -> {
+                        return "Move-Nr";
+                    }
+                    case 1 -> {
+                        return "Start-Field-Nr";
+                    }
+                    case 2 -> {
+                        return "End-Field-Nr";
+                    }
+                    case 3 -> {
+                        return "Event";
+                    }
+                    case 4 -> {
+                        return "Diced number";
+                    }
+                    case 5 -> {
+                        return "Ball moved?";
+                    }
+                    default ->
+                        throw new AssertionError();
+                }
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                switch (columnIndex) {
+                    case 0:
+                        return rowIndex + 1;
+                    case 1:
+                        if (((Movement) movement_histroy.get(rowIndex)).getStart() == null) {
+                            return "Starting Field";
+                        } else {
+                            return ((Field) ((Movement) movement_histroy.get(rowIndex)).getStart()).getFiledNumber();
+                        }
+                    case 2:
+                        return ((Field) ((Movement) movement_histroy.get(rowIndex)).getEnd()).getFiledNumber();
+                    case 3:
+                        return ((Movement) movement_histroy.get(rowIndex)).getMvmtClass().getSimpleName();
+                    case 4:
+                        return ((Movement) movement_histroy.get(rowIndex)).getDice_upper_eye();
+                    case 5:
+                        return ((Movement) movement_histroy.get(rowIndex)).isBall_moved();
+                    default:
+                        throw new AssertionError();
+                }
+            }
+
+        };
+
+        jTable1.setModel(abstractTableModel);
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu = new javax.swing.JMenu();
+        jMenuItem_Clear_from_unmoved = new javax.swing.JMenuItem();
+        jMenuItem_Clear_List = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Histroy View");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Field-Type", "Field-Number", "Connected-Field-Number", "Title 4", "Title 5"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jMenu.setText("View");
+
+        jMenuItem_Clear_from_unmoved.setText("Clear List from unmoved");
+        jMenuItem_Clear_from_unmoved.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_Clear_from_unmovedActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItem_Clear_from_unmoved);
+
+        jMenuItem_Clear_List.setText("Clear List");
+        jMenuItem_Clear_List.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_Clear_ListActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItem_Clear_List);
+
+        jMenuBar1.add(jMenu);
+
+        setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem_Clear_from_unmovedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_Clear_from_unmovedActionPerformed
+        ArrayList<Movement> cleanList = new ArrayList<>();
+        for (Movement mvmt : movement_histroy) {
+            if (mvmt.isBall_moved()) {
+                cleanList.add(mvmt);
+            }
+        }
+        movement_histroy.clear();
+        for (Movement mvmt : cleanList) {
+            if (mvmt.isBall_moved()) {
+                movement_histroy.add(mvmt);
+            }
+        }
+        abstractTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_jMenuItem_Clear_from_unmovedActionPerformed
+
+    private void jMenuItem_Clear_ListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_Clear_ListActionPerformed
+        movement_histroy.clear();
+        abstractTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_jMenuItem_Clear_ListActionPerformed
+
+    /**
+     * In this void the pattern of the abstractTableModel fireTableDataChanged()
+     * will be called to refresh the graphical inforamtion to the user after
+     * changing the data.
+     */
+    public void updateJTable() {
+        abstractTableModel.fireTableDataChanged();
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem_Clear_List;
+    private javax.swing.JMenuItem jMenuItem_Clear_from_unmoved;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    // End of variables declaration//GEN-END:variables
+}
