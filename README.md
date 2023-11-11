@@ -4,4 +4,4 @@ The goal was to write a program that can reproduce the broadgame behaivour of th
 
 
 Preview of the GUI
-![MLSAL preview](https://github.com/KaiHofbauer98/MLSAL/assets/92033660/55605750-5f5e-44e6-b68b-dcfcaef4fd06)
+![MLSAL preview](https://github.com/KaiHofbauer98/MLSAL/assets/92033660/081b646e-ef6d-46e8-86b4-7b5db71147c9)
