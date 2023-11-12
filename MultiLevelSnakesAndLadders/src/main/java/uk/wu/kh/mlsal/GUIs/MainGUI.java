@@ -81,6 +81,9 @@ public class MainGUI extends javax.swing.JFrame {
     private static final HistroyView hsView = new HistroyView(movement_histroy);
     private static final MapView mapView = new MapView(map);
 
+    public static final Dice diceArr[] = new Dice[4];
+    private final AutoLinkListDialog AutoLinkListDialog = new AutoLinkListDialog(this, true);
+
     /**
      * This Thread runs the auto gameplay mode.
      */
@@ -159,14 +162,17 @@ public class MainGUI extends javax.swing.JFrame {
         jButton_move_Ball = new javax.swing.JButton();
         jLabel_Ball_From = new javax.swing.JLabel();
         jLabel_Ball_to = new javax.swing.JLabel();
-        jButton_auto = new javax.swing.JButton();
-        jButton_autoLL = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jComboBox_Ms = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        jButton_auto = new javax.swing.JButton();
+        jButton_autoLL = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jRadioButton_Dark = new javax.swing.JRadioButton();
         jRadioButton_Light = new javax.swing.JRadioButton();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel_SIZE = new javax.swing.JLabel();
+        jLabel_TotalMEM = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem_MapViewer = new javax.swing.JMenuItem();
@@ -227,7 +233,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel_Dice_Upper_Eye, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox_Dice_Eyes, 0, 1, Short.MAX_VALUE)))
-                    .addComponent(jButton_Roll_the_Dice_and_move_Ball, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                    .addComponent(jButton_Roll_the_Dice_and_move_Ball, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -243,7 +249,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(jLabel_Dice_Upper_Eye))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_Roll_the_Dice_and_move_Ball)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_Roll_the_Dice)
                 .addContainerGap())
         );
@@ -273,7 +279,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_Ball_Position, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))
+                        .addComponent(jLabel_Ball_Position, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -316,19 +322,18 @@ public class MainGUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_Ball_From, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_Ball_to, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton_move_Ball))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_Ball_to, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel_Ball_From, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jButton_move_Ball)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,9 +345,17 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel_Ball_to))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_move_Ball))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_move_Ball)
+                .addContainerGap())
         );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Auto Speed"));
+
+        jComboBox_Ms.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "10", "25", "50", "80", "100", "200", "300", "400", "500" }));
+        jComboBox_Ms.setSelectedIndex(5);
+
+        jLabel6.setText("Milliseconds");
 
         jButton_auto.setText("Auto");
         jButton_auto.addActionListener(new java.awt.event.ActionListener() {
@@ -358,22 +371,22 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Auto Speed"));
-
-        jComboBox_Ms.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "25", "50", "80", "100", "200", "300", "400", "500" }));
-        jComboBox_Ms.setSelectedIndex(4);
-
-        jLabel6.setText("Milliseconds");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox_Ms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton_auto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_autoLL)
+                        .addGap(0, 6, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jComboBox_Ms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -383,6 +396,10 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox_Ms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_auto)
+                    .addComponent(jButton_autoLL))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -413,16 +430,44 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButton_Dark, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton_Light, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                    .addComponent(jRadioButton_Light, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jRadioButton_Dark)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton_Light))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton_Light)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Program Memory"));
+
+        jLabel_SIZE.setText("UsedMEM:");
+
+        jLabel_TotalMEM.setText("TotalMEM: ");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel_TotalMEM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_TotalMEM)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Menu");
@@ -477,41 +522,32 @@ public class MainGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton_auto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton_autoLL))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_auto)
-                            .addComponent(jButton_autoLL)))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -529,11 +565,14 @@ public class MainGUI extends javax.swing.JFrame {
         dice.roll_the_dice();
 
         //<editor-fold defaultstate="collapsed" desc="Elements enabled true/false settings">
-        jButton_move_Ball.setEnabled(true);
-        jButton_Roll_the_Dice_and_move_Ball.setEnabled(false);
-        jComboBox_Dice_Eyes.setEnabled(false);
-//</editor-fold>
+        if (!auto) {
+            jButton_autoLL.setEnabled(false);
+            jButton_move_Ball.setEnabled(true);
+            jButton_Roll_the_Dice_and_move_Ball.setEnabled(false);
+            jComboBox_Dice_Eyes.setEnabled(false);
+        }
 
+//</editor-fold>
         jLabel_Dice_Upper_Eye.setText(String.valueOf(dice.getUpperEye()));
 
         Movement mvnt = new Movement(dice, ball, map);
@@ -582,11 +621,14 @@ public class MainGUI extends javax.swing.JFrame {
         jButton_Roll_the_DiceActionPerformed(evt);
 
         //<editor-fold defaultstate="collapsed" desc="Elements enabled true/false settings">
-        jButton_Roll_the_Dice_and_move_Ball.setEnabled(true);
-        jButton_move_Ball.setEnabled(false);
-        jComboBox_Dice_Eyes.setEnabled(true);
-//</editor-fold>
+        if (!auto) {
+            jButton_autoLL.setEnabled(false);
+            jButton_Roll_the_Dice_and_move_Ball.setEnabled(true);
+            jButton_move_Ball.setEnabled(false);
+            jComboBox_Dice_Eyes.setEnabled(true);
+        }
 
+//</editor-fold>
         move_the_Ball();
     }//GEN-LAST:event_jButton_Roll_the_Dice_and_move_BallActionPerformed
 
@@ -602,9 +644,12 @@ public class MainGUI extends javax.swing.JFrame {
     private void jButton_move_BallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_move_BallActionPerformed
         move_the_Ball();
         //<editor-fold defaultstate="collapsed" desc="Elements enabled true/false settings">
-        jButton_move_Ball.setEnabled(false);
-        jComboBox_Dice_Eyes.setEnabled(true);
-        jButton_Roll_the_Dice_and_move_Ball.setEnabled(true);
+        if (!auto) {
+            jButton_move_Ball.setEnabled(false);
+            jComboBox_Dice_Eyes.setEnabled(true);
+            jButton_Roll_the_Dice_and_move_Ball.setEnabled(true);
+        }
+
         //</editor-fold>
     }//GEN-LAST:event_jButton_move_BallActionPerformed
 
@@ -628,6 +673,7 @@ public class MainGUI extends javax.swing.JFrame {
             jButton_autoLL.setEnabled(false);
             autoThread = new Thread(() -> {
                 auto = true;
+                autoAccessSettings(false);
                 while (auto) {
                     try {
                         Thread.sleep(Integer.parseInt(jComboBox_Ms.getSelectedItem().toString()));
@@ -635,7 +681,7 @@ public class MainGUI extends javax.swing.JFrame {
                         Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     jButton_Roll_the_Dice_and_move_BallActionPerformed(evt);
-                    autoAccessSettings(false);
+
                 }
                 jButton_auto.setText("Auto");
                 autoAccessSettings(true);
@@ -675,50 +721,74 @@ public class MainGUI extends javax.swing.JFrame {
      * @param evt
      */
     private void jButton_autoLLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_autoLLActionPerformed
+        //<editor-fold defaultstate="collapsed" desc="Elements enabled true/false settings">
         jButton_auto.setEnabled(false);
         jButton_autoLL.setEnabled(false);
-        Dice diceArr[] = new Dice[4];
+        //</editor-fold>
+//        Dice diceArr[] = new Dice[4];
+        //Dice array will be filled in JDialog.
+        AutoLinkListDialog.reset();
+        AutoLinkListDialog.setVisible(true);
 
-        for (int i = 0; i <= diceArr.length - 1; i++) {
-            try {
-                diceArr[i] = new Dice(6);
-            } catch (Exception ex) {
-                Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            diceArr[i].roll_the_dice();
+        if (AutoLinkListDialog.start) {
+            auto = true;
+            autoAccessSettings(false);
+            autoThread = new Thread(() -> {
+                while (auto) {
+                    try {
+                        Thread.sleep(Integer.parseInt(jComboBox_Ms.getSelectedItem().toString()));
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    int counter = 0;
+                    //jLabel_Dice_Upper_Eye.setText(String.valueOf(dice.getUpperEye()));
+
+                    
+
+                    movement_histroy.add(new Movement(diceArr[counter], ball, map));
+                    
+                    counter++;
+                    
+                    if (movement_histroy.getLast().getStart() == null) {
+                        jLabel_Ball_From.setText("");
+                    } else {
+                        jLabel_Ball_From.setText(String.valueOf(((Field) movement_histroy.getLast().getStart()).getFiledNumber()));
+                    }
+
+                    jLabel_Ball_to.setText(String.valueOf(((Field) movement_histroy.getLast().getEnd()).getFiledNumber()));
+                    hsView.updateJTable();
+
+                    move_the_Ball();
+                    if (counter == 4) {
+                        counter = 0;
+                    }
+
+                    jLabel_TotalMEM.setText("TotalMEM: " + String.valueOf(Runtime.getRuntime().totalMemory() / 1000000) + "M");
+                    jLabel_SIZE.setText("UsedMEM: " + String.valueOf((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1000000) + "M");
+
+                    if (movement_histroy.size() > 100000) {
+                        JOptionPane.showMessageDialog(this, "This would loop forever!", "Infinite Loop Error", JOptionPane.ERROR_MESSAGE);
+                        auto = false;
+                        //<editor-fold defaultstate="collapsed" desc="Elements enabled true/false settings">
+                        jComboBox_Ms.setEnabled(false);
+                        jComboBox_Dice_Eyes.setEnabled(false);
+                        jButton_Roll_the_Dice.setEnabled(false);
+                        jButton_Roll_the_Dice_and_move_Ball.setEnabled(false);
+                        //</editor-fold>
+
+                        break;
+                    }
+                }
+                autoAccessSettings(true);
+            });
+            autoThread.start();
+        } else {
+            //<editor-fold defaultstate="collapsed" desc="Elements enabled true/false settings">
+            jButton_auto.setEnabled(true);
+            jButton_autoLL.setEnabled(true);
+            //</editor-fold>
         }
 
-        auto = true;
-        autoThread = new Thread(() -> {
-            while (auto) {
-                int counter = 0;
-                //jLabel_Dice_Upper_Eye.setText(String.valueOf(dice.getUpperEye()));
-                Movement mvnt = new Movement(diceArr[counter], ball, map);
-                counter++;
-
-                movement_histroy.add(mvnt);
-
-                if (mvnt.getStart() == null) {
-                    jLabel_Ball_From.setText("");
-                } else {
-                    jLabel_Ball_From.setText(String.valueOf(((Field) movement_histroy.getLast().getStart()).getFiledNumber()));
-                }
-
-                jLabel_Ball_to.setText(String.valueOf(((Field) mvnt.getEnd()).getFiledNumber()));
-                hsView.updateJTable();
-
-                move_the_Ball();
-                if (counter == 4) {
-                    counter = 0;
-                }
-                if (movement_histroy.size() > 10000) {
-                    JOptionPane.showMessageDialog(this, "This would loop forever!", "Infinite Loop Error", JOptionPane.ERROR_MESSAGE);
-                    auto = false;
-                    break;
-                }
-            }
-        });
-        autoThread.start();
 
     }//GEN-LAST:event_jButton_autoLLActionPerformed
 
@@ -815,11 +885,14 @@ public class MainGUI extends javax.swing.JFrame {
         hsView.updateJTable();
         //<editor-fold defaultstate="collapsed" desc="Elements enabled true/false settings">
         jButton_auto.setEnabled(true);
+        jButton_autoLL.setEnabled(true);
         jButton_Roll_the_Dice.setEnabled(true);
         jButton_Roll_the_Dice_and_move_Ball.setEnabled(true);
         jComboBox_Dice_Eyes.setEnabled(true);
+        jButton_move_Ball.setEnabled(false);
         //</editor-fold>
     }
+
     //<editor-fold defaultstate="collapsed" desc="Variables declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup;
@@ -842,6 +915,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Ball_to;
     private javax.swing.JLabel jLabel_Dice_Upper_Eye;
     private javax.swing.JLabel jLabel_Goal;
+    private javax.swing.JLabel jLabel_SIZE;
+    private javax.swing.JLabel jLabel_TotalMEM;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -854,6 +929,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JRadioButton jRadioButton_Dark;
     private javax.swing.JRadioButton jRadioButton_Light;
     // End of variables declaration//GEN-END:variables

@@ -35,7 +35,7 @@ public class SplitTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //I wrote this to get an idea of how the splidt void.
+        //I wrote this to get an idea of how the Strings split void.
         System.out.println("4-6".split("\\-")[0]);
 
     }

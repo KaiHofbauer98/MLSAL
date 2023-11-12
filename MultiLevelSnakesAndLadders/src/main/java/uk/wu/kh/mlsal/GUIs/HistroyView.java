@@ -222,7 +222,7 @@ public class HistroyView extends javax.swing.JFrame {
     /**
      * In this void the pattern of the abstractTableModel fireTableDataChanged()
      * will be called to refresh the graphical inforamtion to the user after
-     * changing the data.
+     * changing the table data.
      */
     public void updateJTable() {
         abstractTableModel.fireTableDataChanged();

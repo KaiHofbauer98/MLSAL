@@ -34,7 +34,7 @@ import uk.wu.kh.mlsal.Fields.LadderField;
  *
  * @author kai.hofbauer
  */
-public class TestFields {
+public class TestFieldClasses {
 
     /**
      * @param args the command line arguments

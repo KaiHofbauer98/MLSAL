@@ -44,9 +44,9 @@ package uk.wu.kh.mlsal.alternateFields;
  * and this was the problem! A instance of a Superclass will return the same as
  * the subclasses because they are all instances of the superclass!
  *
- * @deprecated
  * @author Kai Hofbauer
  */
+@Deprecated
 public class Field {
 
     public final static int NO_CONNECTED_FIELD_NUMBER = -1;

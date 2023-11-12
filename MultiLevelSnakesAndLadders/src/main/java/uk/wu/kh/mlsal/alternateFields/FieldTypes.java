@@ -30,10 +30,10 @@ package uk.wu.kh.mlsal.alternateFields;
  * This enumeration displays the three different field types. It is not
  * implemented jet.
  *
- * @deprecated 
  * @see Field
  * @author Kai Hofbauer
  */
+@Deprecated
 public enum FieldTypes {
     STANDARD, LADDER, DROP;
 
